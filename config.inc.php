@@ -26,12 +26,13 @@
         // http://us2.php.net/manual/en/class.pdo.php 
 		$dsn = "pgsql:"
    		  . "host=ec2-50-19-219-235.compute-1.amazonaws.com;"
-  		  . "dbname=jcimkafqmwprgu;"
-  		  . "user=dj1wcxb3x9fy3x5;"
+  		  . "dbname=dcb9qlpfn7bs4v;"
+  		  . "user=jcimkafqmwprgu;"
   		  . "port=5432;"
   		  . "sslmode=require;"
- 		  . "password=dcb9qlpfn7bs4v"; 
+ 		  . "password=AfOUhkZ93s2AxOcapIo5pb-GUt"; 
 		$db = new PDO($dsn);
+		
         //$db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options); 
     } 
     catch(PDOException $ex) 
