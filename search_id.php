@@ -47,7 +47,7 @@ if (!empty($_POST)) {
 	    }
 		$row2 = $stmt2->fetch();
 //Recupero l'id utente dall'hash della tessera
-		$query_id_utente = "SELECT id_utente FROM utenti WHERE hash_tessera = :hash_tessera";
+		$query_id_utente = "SELECT id FROM users WHERE hash_tessera = :hash_tessera";
 		$query_params2 = array(
 			':hash_tessera' => $_POST['hash_tessera'],
 		);
