@@ -31,21 +31,7 @@ if (!empty($_POST)) {
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["user"] = $user;
 //Recupero record riguardo al saldo attivita
-		$query_saldo = "SELECT saldo_attivita FROM mie_attivita NATURAL JOIN utenti WHERE hash_tessera = :hash_tessera AND id_attivita = :id_attivita";
-		$query_params1 = array(
-			':hash_tessera' => $_POST['hash_tessera'],
-			':id_attivita' => $_POST['id_attivita'],
-		);
-		try {
-  		  $stmt2   = $db->prepare($query_saldo);
-  	 	  $result = $stmt2->execute($query_params1);
-		}
-	    catch (PDOException $ex) {
-		  $response["success"] = 0;
- 		  $response["message"] = "Database Error = 2. Riprova!";
- 	    die(json_encode($response));
-	    }
-		$row2 = $stmt2->fetch();
+		
 //Recupero l'id utente dall'hash della tessera
 		$query_id_utente = "SELECT id FROM users WHERE hash_tessera = :hash_tessera";
 		$query_params2 = array(
