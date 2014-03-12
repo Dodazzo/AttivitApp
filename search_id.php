@@ -6,7 +6,7 @@ Questa pagina ricerca all'interno del database l'utente colleggato alla tessera 
 require("config.inc.php");
 if (!empty($_POST)) {
     //Query ricerca utente
-    $query = "SELECT nome FROM utenti WHERE hash_tessera = :hash_tessera"; 
+    $query = "SELECT first_name FROM users WHERE hash_tessera = :hash_tessera"; 
     $query_params = array(':hash_tessera' => $_POST['hash_tessera']);
     
     try {
