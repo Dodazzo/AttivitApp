@@ -47,17 +47,7 @@ if (!empty($_POST)) {
  	    die(json_encode($response));
 	    }
 		$row3 = $stmt3->fetch();
-//Se trovo il saldo aggiungo il JSON relativo...
-		if ($row2) {
-			$saldo_attivita=$row2;
-			$id_utente=$row3;
-			$response["saldo_utente"] = $saldo_attivita;
-			$response["id_utente"] = $id_utente;
-			die(json_encode($response));
-		}
-//Se no rimando indietro solamente l'$user
-		else 
-			die(json_encode($response));
+
 	}
 	else {
         $response["success"] = 0;
