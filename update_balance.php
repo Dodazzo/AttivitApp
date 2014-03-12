@@ -12,6 +12,7 @@ $check = "INSERT INTO receipts (user_id, shop_id, total) VALUES (:id_utente, :id
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
+	   ':saldo' => $_POST['saldo'],
     );
  try {
         $stmt   = $db->prepare($check);
