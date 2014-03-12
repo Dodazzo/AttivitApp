@@ -29,7 +29,7 @@ if (!empty($_POST)) {
     if ($login_ok) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
-		$response["user"] = $user;
+		$response["first_name"] = $user;
 //Recupero record riguardo al saldo attivita
 		
 //Recupero l'id utente dall'hash della tessera

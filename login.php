@@ -42,7 +42,7 @@ if (!empty($_POST)) {
     if ($login_ok) {
         $response["success"] = 1;
         $response["message"] = "Login attività avvenuto con successo!";
-		$response["id_attivita"] = $row['id_attivita'];
+		$response["id_attivita"] = $row['id'];
         die(json_encode($response));
     } else {
         $response["success"] = 0;
