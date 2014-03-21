@@ -32,9 +32,15 @@ if (!empty($_POST)) {
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
-        if ($_POST['password'] === $row['password']) {
-            $login_ok = true;
-        }
+		if (crypt($_POST['password'], $row['password']) == $row['password'])
+  			 {
+				 $response["message"] = "Utente trovato con Crypt";
+				 $login_ok = true;
+				 die(json_encode($response));
+			}
+		else
+  			 $response["message"] = "Errore Crypt";
+			 die(json_encode($response));
     }
     
     // If the user logged in successfully, then we send them to the private members-only page 
