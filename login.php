@@ -26,13 +26,14 @@ if (!empty($_POST)) {
     //This will be the variable to determine whether or not the user's information is correct.
     //we initialize it as false.
     $validated_info = false;
-    
+    $response["message"] = "Prova DIE1";
+		die(json_encode($response));
     //fetching all the rows from the query
     $row = $stmt->fetch();
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
-		$response["message"] = "Prova DIE";
+		$response["message"] = "Prova DIE2";
 		die(json_encode($response));
 		if (crypt($_POST['password'], $row['password']) == $row['password'])
   			 {
