@@ -31,7 +31,12 @@ if (!empty($_POST)) {
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
-		
+		if (password_verify($_POST['password'], $row['password'])) {
+   		 
+		} 
+		else {
+  	
+		}
 	}
     
     // If the user logged in successfully, then we send them to the private members-only page 
