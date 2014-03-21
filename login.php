@@ -31,10 +31,10 @@ if (!empty($_POST)) {
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
-		echo 'BELLA2';
 		$test = password_verify($_POST['password'], $hash);
-		echo $test;
+		echo "psw_verify: {$test} <br />";
 		$hash=$row['encrypted_password'];
+		echo "hash: {$hash}";
 		if (password_verify($_POST['password'], $hash)) {
    		 echo 'BELLA';
 		} 
