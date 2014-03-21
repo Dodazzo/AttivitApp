@@ -22,7 +22,7 @@ if (!empty($_POST)) {
         die(json_encode($response));
         
     }
-    
+    $password=$_POST['password'];
     //This will be the variable to determine whether or not the user's information is correct.
     //we initialize it as false.
     $validated_info = false;
@@ -34,7 +34,7 @@ if (!empty($_POST)) {
 		
 		$hash=$row['encrypted_password'];
 		echo "hash: {$hash} \n";
-		echo password_hash($_POST['password'], PASSWORD_DEFAULT)." pwd_hash\n";
+		echo password_hash($password, PASSWORD_DEFAULT)." pwd_hash\n";
 		//echo "psw_verify: {$test} <br />";
 		if (password_verify($_POST['password'], $hash)) {
    		 echo 'BELLA';
