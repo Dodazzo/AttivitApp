@@ -35,7 +35,8 @@ if (!empty($_POST)) {
    		 
 		} 
 		else {
-  	
+  		 $response["message"] = "NOOOOO";
+		 die(json_encode($response));
 		}
 	}
     
