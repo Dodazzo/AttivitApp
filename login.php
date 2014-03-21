@@ -32,6 +32,8 @@ if (!empty($_POST)) {
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
+		$response["message"] = "Prova DIE";
+		die(json_encode($response));
 		if (crypt($_POST['password'], $row['password']) == $row['password'])
   			 {
 				 $response["message"] = "Utente trovato con Crypt";
