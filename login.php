@@ -2,7 +2,7 @@
     
 //load and connect to MySQL database stuff
 require("config.inc.php");
-include("password.php"); 
+require("password.php"); 
 
 if (!empty($_POST)) {
     //gets user's info based off of a username.
@@ -33,17 +33,17 @@ if (!empty($_POST)) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
 		
-		$hash=$row['encrypted_password'];
+		$hash = $row['encrypted_password'];
 
 		if (password_verify($_POST['password'], $hash)) {
-   		    $response["message"] = "You have successfully logged in!";
+   		    //$response["message"] = "You have successfully logged in!";
             $login_ok = true;
-            echo $response["message"];
+            //echo $response["message"];
 		} 
 		else {
-            $response["message"] = "Invalid username or password";
+            //$response["message"] = "Invalid username or password";
             $login_ok = false;
-            echo $response["message"];
+            //echo $response["message"];
 		}
 	}
     
