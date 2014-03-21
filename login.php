@@ -34,14 +34,16 @@ if (!empty($_POST)) {
         //compare the two passwords
 		
 		$hash=$row['encrypted_password'];
-		echo "hash: {$hash} \n";
-		echo password_hash($_POST['password'], PASSWORD_DEFAULT)."pwd_hash\n";
 
 		if (password_verify($_POST['password'], $hash)) {
-   		 echo 'BELLA';
+   		    $response["message"] = "You have successfully logged in!";
+            $login_ok = true;
+            echo $response["message"];
 		} 
 		else {
-  		echo 'Ehehe no';
+            $response["message"] = "Invalid username or password";
+            $login_ok = false;
+            echo $response["message"];
 		}
 	}
     
@@ -54,7 +56,7 @@ if (!empty($_POST)) {
         die(json_encode($response));
     } else {
         $response["success"] = 0;
-        $response["message"] = "Credenziali sbagliateEEEEE!";
+        $response["message"] = "Credenziali sbagliate!";
         die(json_encode($response));
     }
 } else {
