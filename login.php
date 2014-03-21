@@ -31,17 +31,15 @@ if (!empty($_POST)) {
     if ($row) {
         //if we encrypted the password, we would unencrypt it here, but in our case we just
         //compare the two passwords
-		if (crypt($_POST['password'], $row['password']) == $row['password'])
-  			 {
-				 $response["message"] = "Utente trovato con Crypt";
-				 $login_ok = true;
-				 die(json_encode($response));
-			}
-		else{
-  			 $response["message"] = "Errore Crypt";
-			 die(json_encode($response));
+		if (password_verify($_POST['password'], $row['password'])) {
+   		 $response["message"] = "YEEEEE";
+		 die(json_encode($response));
+		} 
+		else {
+  		 $response["message"] = "NOOOOO";
+		 die(json_encode($response));
 		}
-    }
+	}
     
     // If the user logged in successfully, then we send them to the private members-only page 
     // Otherwise, we display a login failed message and show the login form again 
