@@ -1,7 +1,8 @@
 <?php
-
+    
 //load and connect to MySQL database stuff
 require("config.inc.php");
+include("password.php"); 
 
 if (!empty($_POST)) {
     //gets user's info based off of a username.
@@ -35,7 +36,7 @@ if (!empty($_POST)) {
 		$hash=$row['encrypted_password'];
 		echo "hash: {$hash} \n";
 		echo password_hash($_POST['password'], PASSWORD_DEFAULT)."pwd_hash\n";
-		//echo "psw_verify: {$test} <br />";
+
 		if (password_verify($_POST['password'], $hash)) {
    		 echo 'BELLA';
 		} 
