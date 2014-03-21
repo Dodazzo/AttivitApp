@@ -55,7 +55,7 @@ if (!empty($_POST)) {
         die(json_encode($response));
     } else {
         $response["success"] = 0;
-        $response["message"] = "Credenziali sbagliate!";
+        $response["message"] = "Credenziali sbagliateEEEEE!";
         die(json_encode($response));
     }
 } else {
