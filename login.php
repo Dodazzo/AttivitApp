@@ -33,7 +33,7 @@ if (!empty($_POST)) {
         //compare the two passwords
 		$hash=$row['encrypted_password'];
 		if (password_verify($_POST['password'], $hash)) {
-   		 $response["message"] = "SUPEROK {$hash}";
+   		 $response["message"] = "SUPEROK2 {$hash}";
 		 die(json_encode($response));
 		} 
 		else {
