@@ -26,8 +26,6 @@ if (!empty($_POST)) {
     //This will be the variable to determine whether or not the user's information is correct.
     //we initialize it as false.
     $validated_info = false;
-    $response["message"] = "Prova DIE1";
-		die(json_encode($response));
     //fetching all the rows from the query
     $row = $stmt->fetch();
     if ($row) {
