@@ -38,9 +38,10 @@ if (!empty($_POST)) {
 				 $login_ok = true;
 				 die(json_encode($response));
 			}
-		else
+		else{
   			 $response["message"] = "Errore Crypt";
 			 die(json_encode($response));
+		}
     }
     
     // If the user logged in successfully, then we send them to the private members-only page 
