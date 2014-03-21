@@ -33,9 +33,9 @@ if (!empty($_POST)) {
         //compare the two passwords
 		
 		$hash=$row['encrypted_password'];
-		echo "hash: {$hash}";
-		$test = password_verify($_POST['password'], $hash);
-		echo "psw_verify: {$test} <br />";
+		echo "hash: {$hash} \n";
+		echo password_hash($_POST['password'], PASSWORD_DEFAULT)." pwd_hash\n";
+		//echo "psw_verify: {$test} <br />";
 		if (password_verify($_POST['password'], $hash)) {
    		 echo 'BELLA';
 		} 
