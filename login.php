@@ -5,7 +5,7 @@ require("config.inc.php");
 
 if (!empty($_POST)) {
     //gets user's info based off of a username.
-    $query = "SELECT id, email, encrypt_password FROM shops WHERE email = :username";    
+    $query = "SELECT id, email, encrypted_password FROM shops WHERE email = :username";    
     $query_params = array(':username' => $_POST['username']);
     
     try {
