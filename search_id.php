@@ -31,6 +31,7 @@ if (!empty($_POST)) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["first_name"] = $first_name;
+		die(json_encode($response));
 		//$response["id"] = $id_utente;
 		//die(json_encode($response));
 //Recupero record riguardo al saldo attivita
