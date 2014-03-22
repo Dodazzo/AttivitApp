@@ -6,7 +6,7 @@ Questa pagina ricerca all'interno del database l'utente colleggato alla tessera 
 require("config.inc.php");
 if (!empty($_POST)) {
     //Query ricerca utente
-    $query = "SELECT first_name, id FROM users WHERE hash_tessera = :hash_tessera"; 
+    $query = "SELECT first_name FROM users WHERE hash_tessera = :hash_tessera"; 
     $query_params = array(':hash_tessera' => $_POST['hash_tessera']);
     
     try {
@@ -23,7 +23,7 @@ if (!empty($_POST)) {
     if ($row) {
             $login_ok = true;
 			$first_name=$row['first_name'];
-			$id_utente=$row['id'];
+			//$id_utente=$row['id'];
         }
     }
 //Utente Trovato
@@ -31,7 +31,7 @@ if (!empty($_POST)) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["first_name"] = $first_name;
-		$response["id"] = $id_utente;
+		//$response["id"] = $id_utente;
 		die(json_encode($response));
 //Recupero record riguardo al saldo attivita
 		
