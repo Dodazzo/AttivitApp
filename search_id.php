@@ -22,7 +22,7 @@ if (!empty($_POST)) {
     $row = $stmt->fetch();
     if ($row) {
             $login_ok = true;
-			$user=$row;
+			$first_name=$row;
         }
     }
 //Utente Trovato
@@ -30,24 +30,23 @@ if (!empty($_POST)) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["first_name"] = $user;
-    die(json_encode($response));
 //Recupero record riguardo al saldo attivita
 		
 //Recupero l'id utente dall'hash della tessera
-		$query_id_utente = "SELECT id FROM users WHERE hash_tessera = :hash_tessera";
-		$query_params2 = array(
-			':hash_tessera' => $_POST['hash_tessera'],
-		);
-		try {
-  		  $stmt3   = $db->prepare($query_id_utente);
-  	 	  $result2 = $stmt3->execute($query_params2);
-		}
-	    catch (PDOException $ex) {
-		  $response["success"] = 0;
- 		  $response["message"] = "Database Error = 3. Riprova!";
- 	    die(json_encode($response));
-	    }
-		$row3 = $stmt3->fetch();
+		//$query_id_utente = "SELECT id FROM users WHERE hash_tessera = :hash_tessera";
+		//$query_params2 = array(
+		//	':hash_tessera' => $_POST['hash_tessera'],
+		//);
+		//try {
+  	//	  $stmt3   = $db->prepare($query_id_utente);
+  	 	//  $result2 = $stmt3->execute($query_params2);
+		//}
+	  //  catch (PDOException $ex) {
+		//  $response["success"] = 0;
+ 		//  $response["message"] = "Database Error = 3. Riprova!";
+ 	   // die(json_encode($response));
+	   // }
+		//$row3 = $stmt3->fetch();
 
 	}
 	else {
