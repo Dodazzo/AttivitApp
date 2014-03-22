@@ -22,7 +22,7 @@ if (!empty($_POST)) {
     $row = $stmt->fetch();
     if ($row) {
             $login_ok = true;
-			$first_name=$row['first_name'];
+			$first_name=$row;
 			//$id_utente=$row['id'];
         }
     }
