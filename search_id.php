@@ -24,8 +24,6 @@ if (!empty($_POST)) {
             $login_ok = true;
 			$user=$row;
         }
-	$response["message"] = "TEST2";
-    die(json_encode($response));
     }
 //Utente Trovato
     if ($login_ok) {
