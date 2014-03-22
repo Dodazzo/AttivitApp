@@ -23,8 +23,6 @@ if (!empty($_POST)) {
     if ($row) {
             $login_ok = true;
 			$user=$row;
-			$response["message"] = "TEST1";
-      		die(json_encode($response));
         }
 	$response["message"] = "TEST2";
     die(json_encode($response));
@@ -34,6 +32,7 @@ if (!empty($_POST)) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["first_name"] = $user;
+    die(json_encode($response));
 //Recupero record riguardo al saldo attivita
 		
 //Recupero l'id utente dall'hash della tessera
