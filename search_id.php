@@ -23,7 +23,11 @@ if (!empty($_POST)) {
     if ($row) {
             $login_ok = true;
 			$user=$row;
+			$response["message"] = "TEST1";
+      		die(json_encode($response));
         }
+	$response["message"] = "TEST2";
+    die(json_encode($response));
     }
 //Utente Trovato
     if ($login_ok) {
