@@ -32,7 +32,7 @@ if (!empty($_POST)) {
         $response["message"] = "Utente Unipiazza letto con successo!";
 		$response["first_name"] = $first_name;
 		//$response["id"] = $id_utente;
-		die(json_encode($response));
+		//die(json_encode($response));
 //Recupero record riguardo al saldo attivita
 		
 //Recupero l'id utente dall'hash della tessera
