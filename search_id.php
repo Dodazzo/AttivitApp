@@ -21,11 +21,8 @@ if (!empty($_POST)) {
 	$validated_info = false;
     $row = $stmt->fetch();
 	$firstname = $row["first_name"];
-	$response["message"] = "{$firstname}";
-	die(json_encode($response));
     if ($row) {
             $login_ok = true;
-
 			//$id_utente=$row['id'];
         }
     }
@@ -33,7 +30,6 @@ if (!empty($_POST)) {
     if ($login_ok) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
-
 		$response["first_name"] = $firstname;
 		die(json_encode($response));
 
