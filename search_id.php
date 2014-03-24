@@ -20,11 +20,11 @@ if (!empty($_POST)) {
     }
 	$validated_info = false;
     $row = $stmt->fetch();
-	$firstname = $row["first_name"];
-	$id = $row["id"];
+	
     if ($row) {
             $login_ok = true;
-			//$id_utente=$row['id'];
+			$firstname = $row["first_name"];
+			$id = $row["id"];
         }
     }
 //Utente Trovato

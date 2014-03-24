@@ -7,7 +7,9 @@ Qualora fosse la prima volta che l'utente visita il locale, la pagina provvederÃ
 require("config.inc.php");
 
 //Query di controllo 
-$check = "INSERT INTO receipts (user_id, shop_id, total) VALUES (:id_utente, :id_attivita, :saldo);";
+date_default_timezone_set('Europe/Rome'); 
+$date = date('Y-m-d H:i:s');
+$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, $date);";
 //Inizializzo parametri
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
