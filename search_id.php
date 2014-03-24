@@ -19,8 +19,9 @@ if (!empty($_POST)) {
         die(json_encode($response));
     }
 	$validated_info = false;
-    $firstname = $stmt->fetch();
-	$response["message"] = "{$firstname[0]}";
+    $row = $stmt->fetch();
+	$firstname = $row["first_name"];
+	$response["message"] = "{$firstname}";
 	die(json_encode($response));
     if ($row) {
             $login_ok = true;
