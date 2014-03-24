@@ -20,6 +20,8 @@ if (!empty($_POST)) {
     }
 	$validated_info = false;
     $firstname = $stmt->fetch();
+	$response["message"] = "{$firstname}";
+	die(json_encode($response));
     if ($row) {
             $login_ok = true;
 			//$id_utente=$row['id'];
