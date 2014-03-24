@@ -9,7 +9,7 @@ require("config.inc.php");
 //Query di controllo 
 date_default_timezone_set('Europe/Rome'); 
 $date = date('Y-m-d H:i:s');
-$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, $date);";
+$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, '2014-03-24 13:41:45');";
 //Inizializzo parametri
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
