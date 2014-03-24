@@ -24,6 +24,7 @@ if (!empty($_POST)) {
 	die(json_encode($response));
     if ($row) {
             $login_ok = true;
+
 			//$id_utente=$row['id'];
         }
     }
@@ -31,8 +32,10 @@ if (!empty($_POST)) {
     if ($login_ok) {
 		$response["success"] = 1;
         $response["message"] = "Utente Unipiazza letto con successo!";
+
 		$response["first_name"] = $firstname;
 		die(json_encode($response));
+
 		//$response["id"] = $id_utente;
 		//die(json_encode($response));
 //Recupero record riguardo al saldo attivita
