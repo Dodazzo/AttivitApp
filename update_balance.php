@@ -22,13 +22,12 @@ $query_params0 = array(
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 1. Riprova!";
+        $response["message"] = "Database Error = 1. Riprova! Data: {$date}";
         die(json_encode($response));
     }
 $row = $stmt->fetch();
 $response["success"] = 1;
-$response["date"] = "{$date}";
-$response["message"] = "Aggiunto con successo il check in YO! {$row['date']}";
+$response["message"] = "Aggiunto con successo il check in YO! {$date}";
 die(json_encode($response));
 //Controllo se c'è già un record nel DB mie_attivita relativo all'utente
 //if ($row) {
