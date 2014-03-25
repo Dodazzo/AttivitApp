@@ -58,7 +58,7 @@ if (!empty($_POST)) {
 	}
 	else {
         $response["success"] = 0;
-        $response["message"] = "Utente non trovato =(";
+        $response["message"] = "Utente non trovato :(";
         die(json_encode($response));
         
     }?>
