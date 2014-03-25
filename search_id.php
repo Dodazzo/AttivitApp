@@ -30,7 +30,7 @@ if (!empty($_POST)) {
 //Utente Trovato
     if ($login_ok) {
 		$response["success"] = 1;
-        $response["message"] = "Utente letto con successo!";
+        $response["message"] = "Utente trovato :)";
 		$response["first_name"] = $firstname;
 		$response["id"] = $id;
 		die(json_encode($response));
