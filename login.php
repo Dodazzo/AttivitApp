@@ -51,7 +51,7 @@ if (!empty($_POST)) {
     // Otherwise, we display a login failed message and show the login form again 
     if ($login_ok) {
         $response["success"] = 1;
-        $response["message"] = "Login attività avvenuto con successo!";
+        $response["message"] = "Login avvenuto con successo!";
 		$response["id_attivita"] = $row['id'];
         die(json_encode($response));
     } else {
