@@ -6,7 +6,7 @@ require("password.php");
 
 if (!empty($_POST)) {
     //gets user's info based off of a username.
-    $query = "SELECT id, email, encrypted_password FROM shops WHERE email = :username";    
+    $query = "SELECT name, id, email, encrypted_password FROM shops WHERE email = :username";    
     $query_params = array(':username' => $_POST['username']);
     
     try {
@@ -50,8 +50,9 @@ if (!empty($_POST)) {
     // If the user logged in successfully, then we send them to the private members-only page 
     // Otherwise, we display a login failed message and show the login form again 
     if ($login_ok) {
+		$nome_attivita=$row['name'];
         $response["success"] = 1;
-        $response["message"] = "Login avvenuto con successo!";
+        $response["message"] = "Buongiorno {$nome_attivita}!";
 		$response["id_attivita"] = $row['id'];
         die(json_encode($response));
     } else {
