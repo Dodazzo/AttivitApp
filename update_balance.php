@@ -44,6 +44,7 @@ try {
     }
 $row = $stmt->fetch();
 if ($row) {
+	$coin_trovato = $row['coins'];
 	//Record utente_shops trovato!
 	//if (!empty($_POST['gift']))
 	// Se è un regalo:
@@ -63,6 +64,7 @@ if ($row) {
 		$row = $stmt->fetch();
 		$response["success"] = 1;
 		$response["message"] = "Update coins avvenuto con successo!";
+		$responde["saldo_aggiornato"]= $coin_trovato+$_POST['saldo'];
 		die(json_encode($response));
 }
 
@@ -86,6 +88,7 @@ else {
 	}
 	$response["success"] = 1;
 	$response["message"] = "Record Utente inserito con successo (aggiornato)!";
+	$responde["saldo_aggiornato"]= $_POST['saldo'];
 	die(json_encode($response));
 }
 
