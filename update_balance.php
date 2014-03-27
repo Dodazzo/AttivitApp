@@ -67,9 +67,10 @@ if ($row) {
          die(json_encode($response));
    		 }
 		$row = $stmt->fetch();
+		$saldo_aggiornato=$coin_trovato+$_POST['saldo'];
 		$response["success"] = 1;
 		$response["message"] = "Update coins avvenuto con successo!";
-		$responde["saldo_aggiornato"]= $coin_trovato+$_POST['saldo'];
+		$responde["saldo_aggiornato"]= $saldo_aggiornato;
 		die(json_encode($response));
 }
 
@@ -91,9 +92,10 @@ else {
  	  $response["message"] = "Database Error = 4. Riprova!";
  	  die(json_encode($response));
 	}
+	$saldo_aggiornato=$_POST['saldo'];
 	$response["success"] = 1;
 	$response["message"] = "Record Utente inserito con successo (aggiornato)!";
-	$responde["saldo_aggiornato"]= $_POST['saldo'];
+	$responde["saldo_aggiornato"] = $saldo_aggiornato;
 	die(json_encode($response));
 }
 
