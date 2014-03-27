@@ -7,61 +7,41 @@ we will be talking with our database, and therefore,
 let's require the connection to happen:
 */
 require("config.inc.php");
-//Estraggo saldo_attivita dell'utente per vedere quale prodotto gratis può ricevere
-$check = "SELECT * FROM mie_attivita WHERE id_utente = :id_utente AND id_attivita = :id_attivita";
+//Selezioni i prodotti premio che l'utente può permettersi
+$check = "SELECT * FROM shops_products sp JOIN products p WHERE (p.shop_id = :id_attivita AND p.type = 'price') AND (p.coins <= :coins_user)";
 //Inizializzo parametri
-$query_params0 = array(
-	   ':id_utente' => $_POST['id_utente'],
+$query_params = array(
 	   ':id_attivita' => $_POST['id_attivita'],
+	   ':coins_user' => $_POST['saldo_attivita'],
     );
  try {
         $stmt   = $db->prepare($check);
-        $result = $stmt->execute($query_params0);
+        $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
         $response["message"] = "Database Error = 1. Riprova!";
         die(json_encode($response));
     }
-$row = $stmt->fetch();
-$saldo=$row['saldo_attivita'];
-//initial query
-$query = "SELECT p.nome, pa.gettoni FROM (prodotti_attivita pa NATURAL JOIN prodotti p) JOIN attivita a ON (a.id_attivita = pa.id_attivita) WHERE a.username = :username AND pa.tipo = 'regalo' AND pa.gettoni <= '$saldo'";
-$query_params = array(':username' => $_POST['username']);
-//execute query
-try {
-    $stmt   = $db->prepare($query);
-    $result = $stmt->execute($query_params);
-}
-catch (PDOException $ex) {
-    $response["success"] = 0;
-    $response["message"] = "Database Error!";
-    die(json_encode($response));
-}
-
-// Finally, we can retrieve all of the found rows into an array using fetchAll 
-$rows = $stmt->fetchAll();
-
-
-if ($rows) {
+	
+$row = $stmt->fetchAll();
+if ($row) {
     $response["success"] = 1;
-    $response["message"] = "Prodotti disponibili!";
+    $response["message"] = "Prodotti premio disponibili!";
     $response["products"]   = array();
     
-    foreach ($rows as $row) {
+    foreach ($row as $row) {
         $post             = array();
-		$post["nome"]  = $row["nome"];
-        $post["immagine"] = $row["immagine"];
-		$post["gettoni"] = $row["gettoni"];
-        
+		$post["name"]  = $row["p.name"];
+        $post["avatar"] = $row["p.avatar"];
+		$post["coins"] = $row["ps.coins"];
         //update our repsonse JSON data
+           //update our repsonse JSON data
         array_push($response["products"], $post);
     }
-    
-    // echoing JSON response
+        // echoing JSON response
     echo json_encode($response);
-    
-    
+        
 } else {
     $response["success"] = 0;
     $response["message"] = "Non ci sono prodotti disponibili!";
@@ -69,3 +49,5 @@ if ($rows) {
 }
 
 ?>
+
+
