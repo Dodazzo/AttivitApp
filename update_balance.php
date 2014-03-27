@@ -67,7 +67,8 @@ if ($row) {
          die(json_encode($response));
    		 }
 		$row = $stmt->fetch();
-		$saldo_aggiornato=$coin_trovato+$_POST['saldo'];
+		//$saldo_aggiornato=$coin_trovato+$_POST['saldo'];
+		$saldo_aggiornato='99';
 		$response["success"] = 1;
 		$response["message"] = "Update coins avvenuto con successo!";
 		$responde["saldo_aggiornato"]= $saldo_aggiornato;
