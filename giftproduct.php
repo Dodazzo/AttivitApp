@@ -12,7 +12,7 @@ $check = "SELECT * FROM shops_products sp JOIN products p WHERE (p.shop_id = :id
 //Inizializzo parametri
 $query_params = array(
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':coins_user' => $_POST['saldo_attivita'],
+	   ':users_coins' => $_POST['users_coins'],
     );
  try {
         $stmt   = $db->prepare($check);
