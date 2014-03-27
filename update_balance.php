@@ -55,6 +55,7 @@ if ($row) {
 		$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
+			':saldo' => $_POST['saldo'],
 	    );
 		try {
       	  $stmt   = $db->prepare($query);
