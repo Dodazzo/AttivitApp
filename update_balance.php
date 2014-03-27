@@ -35,7 +35,7 @@ $query = "SELECT * FROM user_shops WHERE user_id = :id_utente";
 $query_params = array(':id_utente' => $_POST['id_utente']);
 try {
         $stmt   = $db->prepare($query);
-        $result = $stmt->execute($query_params0);
+        $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
