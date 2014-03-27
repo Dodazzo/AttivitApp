@@ -8,11 +8,10 @@ let's require the connection to happen:
 */
 require("config.inc.php");
 //Selezioni i prodotti premio che l'utente può permettersi
-$check = "SELECT * FROM shops_products sp NATURAL JOIN products p WHERE (sp.shop_id = :id_attivita AND sp.product_type = 'prize') AND (sp.coins <= :coins_user)";
+$check = "SELECT * FROM shops_products WHERE (shop_id = :id_attivita AND product_type = 'prize') ";
 //Inizializzo parametri
 $query_params = array(
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':users_coins' => $_POST['users_coins'],
     );
  try {
         $stmt   = $db->prepare($check);
