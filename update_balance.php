@@ -71,7 +71,7 @@ if ($row) {
 		$saldo_aggiornato='99';
 		$response["success"] = 1;
 		$response["message"] = "Update coins avvenuto con successo!";
-		$responde["saldo_aggiornato"]= $saldo_aggiornato;
+		$responde["saldo_aggiornato"]= "22";
 		die(json_encode($response));
 }
 
