@@ -27,12 +27,34 @@ if (!empty($_POST)) {
 			$id = $row["id"];
         }
     }
+	//Query Saldo Utente
+	$query = "SELECT coins FROM user_shops WHERE user_id = :id"; 
+    $query_params = array(':id' => $row['id']);
+	 try {
+        $stmt   = $db->prepare($query);
+        $result = $stmt->execute($query_params);
+    }
+    catch (PDOException $ex) {
+        $response["success"] = 0;
+        $response["message"] = "Database Error2. Riprova!";
+        die(json_encode($response));
+    }
+	$row_2 = $stmt->fetch();
+	if ($row_2) {
+            $id_ok = true;
+			$coins = $row_2["coins"];
+	}
+	else {
+			$id_ok = true;
+			$coins='0';
+	}	
 //Utente Trovato
-    if ($login_ok) {
+    if ($login_ok && $id_ok) {
 		$response["success"] = 1;
         $response["message"] = "Utente trovato :)";
 		$response["first_name"] = $firstname;
 		$response["id"] = $id;
+		$response["coins"] = $coins;
 		die(json_encode($response));
 
 		//$response["id"] = $id_utente;

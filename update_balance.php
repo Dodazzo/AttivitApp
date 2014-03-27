@@ -23,18 +23,75 @@ $query_params0 = array(
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 1. Riprova! Data: {$date}";
+        $response["message"] = "Database Error = 1.!";
         die(json_encode($response));
     }
 $row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
-die(json_encode($response));
-//Controllo se c'è già un record nel DB mie_attivita relativo all'utente
-//if ($row) {
-//	if (!empty($_POST['gift']))
-	//	$query = "UPDATE mie_attivita SET saldo_attivita = saldo_attivita - :saldo WHERE id_utente = :id_utente AND id_attivita = :id_attivita";
-//	else 
+
+//Controllo se c'è già un record nel DB user_shops relativo all'utente
+$query = "SELECT * FROM user_shops WHERE user_id = :id_utente";    
+$query_params = array(':id_utente' => $_POST['id_utente']);
+try {
+        $stmt   = $db->prepare($query);
+        $result = $stmt->execute($query_params0);
+    }
+    catch (PDOException $ex) {
+        $response["success"] = 0;
+        $response["message"] = "Database Error = 2. ";
+        die(json_encode($response));
+    }
+$row = $stmt->fetch();
+if ($row) {
+	//Record utente_shops trovato!
+	//if (!empty($_POST['gift']))
+	// Se è un regalo:
+	//	$query = "UPDATE user_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
+	//else 
+	// Se no:
+		$query = "UPDATE user_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
+		try {
+      	  $stmt   = $db->prepare($query);
+       	  $result = $stmt->execute($query_params0);
+   		 }
+   		 catch (PDOException $ex) {
+     	  $response["success"] = 0;
+      	  $response["message"] = "Database Error = 3. ";
+         die(json_encode($response));
+   		 }
+		$row = $stmt->fetch();
+		$response["success"] = 1;
+		$response["message"] = "Update coins avvenuto con successo!";
+		die(json_encode($response));
+}
+
+else {
+	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
+	$query = "INSERT INTO user_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
+	$query_params = array(
+      ':saldo' => $_POST['saldo'],
+	  ':id_utente' => $_POST['id_utente'],
+	  ':id_attivita' => $_POST['id_attivita'],
+      );
+//Eseguo la query
+	try {
+  	  $stmt   = $db->prepare($query);
+  	  $result = $stmt->execute($query_params);
+	}
+	catch (PDOException $ex) {
+	  $response["success"] = 0;
+ 	  $response["message"] = "Database Error = 4. Riprova!";
+ 	  die(json_encode($response));
+	}
+	$response["success"] = 1;
+	$response["message"] = "Record Utente inserito con successo (aggiornato)!";
+	die(json_encode($response));
+}
+
+
+
+	
   // 	 	$query = "UPDATE mie_attivita SET saldo_attivita = saldo_attivita + :saldo WHERE id_utente = :id_utente AND id_attivita = :id_attivita";
 //	$query_params = array(
  //     ':saldo' => $_POST['saldo'],
@@ -78,24 +135,7 @@ die(json_encode($response));
 //		}
      // echoing JSON response
 //}
-//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
-//else {
-//	$query = "INSERT INTO mie_attivita (id_utente, id_attivita, saldo_attivita) VALUES (:id_utente, :id_attivita, :saldo);";
-//	$query_params = array(
-  //    ':saldo' => $_POST['saldo'],
-	//  ':id_utente' => $_POST['id_utente'],
-	//  ':id_attivita' => $_POST['id_attivita'],
-  //    );
-//Eseguo la query
-//	try {
-  //	  $stmt   = $db->prepare($query);
-  //	  $result = $stmt->execute($query_params);
-	//}
-	//catch (PDOException $ex) {
-//	  $response["success"] = 0;
- //	  $response["message"] = "Database Error = 3. Riprova!";
- //	  die(json_encode($response));
-//	}
+
 // Aggiornamento Saldo
   //  $response["success"] = 1;
   //  $response["message"] = "Record Creato e saldo Aggiornato!";
