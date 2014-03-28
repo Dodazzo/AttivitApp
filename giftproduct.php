@@ -30,10 +30,10 @@ if ($row) {
     $response["products"]   = array();
     
     foreach ($row as $row) {
-        $post             = array();
-		$post["name"]  = $row["p.name"];
-        $post["avatar"] = $row["p.avatar"];
-		$post["coins"] = $row["ps.coins"];
+        $products             = array();
+		$products["name"]  = $row["p.name"];
+        $products["avatar"] = $row["p.avatar"];
+		$products["coins"] = $row["ps.coins"];
         //update our repsonse JSON data
            //update our repsonse JSON data
         array_push($response["products"], $post);
