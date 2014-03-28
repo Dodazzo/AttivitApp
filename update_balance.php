@@ -55,7 +55,7 @@ if ($row) {
 		$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
-			':saldo' => $_POST['saldo'],
+			':saldo' => ($_POST['saldo']*10),
 	    );
 		try {
       	  $stmt   = $db->prepare($query);
@@ -67,7 +67,7 @@ if ($row) {
          die(json_encode($response));
    		 }
 		$row = $stmt->fetch();
-		$saldo_aggiornato=$coin_trovato+$_POST['saldo'];
+		$saldo_aggiornato=$coin_trovato+($_POST['saldo']*10);
 		$response["success"] = 1;
 		$response["message"] = "Update coins avvenuto con successo!";
 		$response["saldo"]= $saldo_aggiornato;
@@ -78,7 +78,7 @@ else {
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
 	$query = "INSERT INTO user_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
 	$query_params = array(
-      ':saldo' => $_POST['saldo'],
+      ':saldo' => ($_POST['saldo']*10),
 	  ':id_utente' => $_POST['id_utente'],
 	  ':id_attivita' => $_POST['id_attivita'],
       );
@@ -92,7 +92,7 @@ else {
  	  $response["message"] = "Database Error = 4. Riprova!";
  	  die(json_encode($response));
 	}
-	$saldo_aggiornato=$_POST['saldo'];
+	$saldo_aggiornato=($_POST['saldo']*10);
 	$response["success"] = 1;
 	$response["message"] = "Record Utente inserito con successo (aggiornato)!";
 	$response["saldo_aggiornato"] = $saldo_aggiornato;
