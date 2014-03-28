@@ -14,7 +14,7 @@ $check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':saldo' => $_POST['saldo'],
+	   ':saldo' => ($_POST['saldo']*10),
 	   ':date' => $date,
     );
  try {
