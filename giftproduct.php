@@ -24,16 +24,15 @@ $query_params = array(
         die(json_encode($response));
     }
 	
-$row = $stmt->fetchAll();
-if ($row) {
+$rows = $stmt->fetchAll();
+if ($rows) {
     $response["success"] = 1;
     $response["message"] = "Prodotti premio disponibili!";
     $response["products"]   = array();
     
-    foreach ($row as $row) {
+    foreach ($rows as $row) {
         $products             = array();
 		$products["name"]  = $row["p.name"];
-        $products["avatar"] = $row["p.avatar_file_name"];
 		$products["coins"] = $row["ps.coins"];
         //update our repsonse JSON data
            //update our repsonse JSON data
