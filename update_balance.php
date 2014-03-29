@@ -51,7 +51,7 @@ if ($row) {
 	//	$query = "UPDATE user_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 	//else 
 	// Se no:
-		$query = "UPDATE user_shops SET coins = coins + $coins_moltiplicati WHERE user_id = :id_utente AND shop_id = :id_attivita";
+		$query = "UPDATE user_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 		$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
