@@ -14,7 +14,7 @@ $check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':saldo' => ($_POST['saldo']*10),
+	   ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
 	   ':date' => $date,
     );
  try {
@@ -51,11 +51,11 @@ if ($row) {
 	//	$query = "UPDATE user_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 	//else 
 	// Se no:
-		$query = "UPDATE user_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
+		$query = "UPDATE user_shops SET coins = coins + $coins_moltiplicati WHERE user_id = :id_utente AND shop_id = :id_attivita";
 		$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
-			':saldo' => ($_POST['saldo']*10),
+			':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
 	    );
 		try {
       	  $stmt   = $db->prepare($query);
@@ -79,7 +79,7 @@ else {
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
 	$query = "INSERT INTO user_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
 	$query_params = array(
-      ':saldo' => ($_POST['saldo']*10),
+      ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
 	  ':id_utente' => $_POST['id_utente'],
 	  ':id_attivita' => $_POST['id_attivita'],
       );
