@@ -11,9 +11,7 @@ require("config.inc.php");
 $check = "SELECT p.name, sp.coins FROM shops_products sp JOIN products p ON (sp.product_id = p.id) WHERE sp.shop_id = :id_attivita";
 // AND product_type = 'prize')
 //Inizializzo parametri
-$query_params = array(
-	   ':id_attivita' => $_POST['id_attivita'],
-    );
+$query_params = array(':id_attivita' => $_POST['id_attivita']);
  try {
         $stmt   = $db->prepare($check);
         $result = $stmt->execute($query_params);
@@ -35,8 +33,7 @@ if ($rows) {
 		$products["name"]  = $row["name"];
 		$products["coins"] = $row["coins"];
         //update our repsonse JSON data
-           //update our repsonse JSON data
-        array_push($response["products"], $post);
+        array_push($response["products"], $products);
     }
         // echoing JSON response
     echo json_encode($response);

@@ -30,8 +30,8 @@ $row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 
-//Controllo se c'è già un record nel DB user_shops relativo all'utente
-$query = "SELECT coins FROM user_shops WHERE user_id = :id_utente";    
+//Controllo se c'è già un record nel DB users_shops relativo all'utente
+$query = "SELECT coins FROM users_shops WHERE user_id = :id_utente";    
 $query_params = array(':id_utente' => $_POST['id_utente']);
 try {
         $stmt   = $db->prepare($query);
@@ -51,7 +51,7 @@ if ($row) {
 	//	$query = "UPDATE user_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 	//else 
 	// Se no:
-		$query = "UPDATE user_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
+		$query = "UPDATE users_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 		$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
@@ -77,7 +77,7 @@ if ($row) {
 
 else {
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
-	$query = "INSERT INTO user_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
+	$query = "INSERT INTO users_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
 	$query_params = array(
       ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
 	  ':id_utente' => $_POST['id_utente'],
