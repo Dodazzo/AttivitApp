@@ -28,7 +28,7 @@ if (!empty($_POST)) {
         }
     }
 	//Query Saldo Utente
-	$query = "SELECT coins FROM user_shops WHERE user_id = :id"; 
+	$query = "SELECT coins FROM users_shops WHERE user_id = :id"; 
     $query_params = array(':id' => $row['id']);
 	 try {
         $stmt   = $db->prepare($query);
