@@ -33,7 +33,7 @@ if ($row) {
     foreach ($row as $row) {
         $products             = array();
 		$products["name"]  = $row["p.name"];
-        $products["avatar"] = $row["p.avatar"];
+        $products["avatar"] = $row["p.avatar_file_name"];
 		$products["coins"] = $row["ps.coins"];
         //update our repsonse JSON data
            //update our repsonse JSON data
