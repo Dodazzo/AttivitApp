@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Rome');
 $date = date('Y-m-d H:i:s');
 //Se il campo post['GIFT'] è vuoto, eseguo l'if
 if (empty($_POST['gift'])){
-$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, :date);";
+$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, :date)";
 //Inizializzo parametri
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
@@ -33,7 +33,7 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
 //Se il campo post['GIFT'] non è vuoto, eseguo l'else
 else {
-$check = "INSERT INTO prize (user_id, shop_id, shop_product_id, created_at) VALUES (:id_utente, :id_attivita, :product_id, :date);";
+$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :product_id, :date)";
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
