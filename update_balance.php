@@ -71,7 +71,7 @@ if ($row) {
 	$coin_trovato = $row['coins'];
 	// Se è un prodotto premio:
 	if ($_POST['gift']){
-	$query = "UPDATE user_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
+	$query = "UPDATE users_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 	$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
 	   		':id_attivita' => $_POST['id_attivita'],
