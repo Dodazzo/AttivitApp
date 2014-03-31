@@ -35,9 +35,9 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 else {
 $check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
 $query_params0 = array(
-	   ':id_utente' => 200,
-	   ':id_attivita' => 4,
-	   ':gift_id' => 1,
+	   ':id_utente' => $_POST['id_utente'],
+	   ':id_attivita' => $_POST['id_attivita'],
+	   ':gift_id' => $_POST['gift_id'],
 	   ':date' => $date,
     );
  try {
@@ -46,7 +46,7 @@ $query_params0 = array(
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 2. Uff.!";
+        $response["message"] = "Database Error = 2. Uff. Id Utente : {$_POST['id_utente']} | Id Attivita : {$_POST['id_attivita']} | Gift Id : {$_POST['gift_id']} | {$date}!";
         die(json_encode($response));
     }
 $response["success"] = 1;
