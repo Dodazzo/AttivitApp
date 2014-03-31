@@ -46,7 +46,7 @@ $query_params0 = array(
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 1.!";
+        $response["message"] = "Database Error = 2.!";
         die(json_encode($response));
     }
 $row = $stmt->fetch();
@@ -63,7 +63,7 @@ try {
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 2. ";
+        $response["message"] = "Database Error = 3. ";
         die(json_encode($response));
     }
 $row = $stmt->fetch();
@@ -83,7 +83,7 @@ if ($row) {
    		 }
    		 catch (PDOException $ex) {
      	  $response["success"] = 0;
-      	  $response["message"] = "Database Error = 3. ";
+      	  $response["message"] = "Database Error = 4. ";
          die(json_encode($response));
    		 }
 	$row = $stmt->fetch();
@@ -107,7 +107,7 @@ if ($row) {
    		 }
    		 catch (PDOException $ex) {
      	  $response["success"] = 0;
-      	  $response["message"] = "Database Error = 4. ";
+      	  $response["message"] = "Database Error = 5. ";
          die(json_encode($response));
    		 }
 		$row = $stmt->fetch();
@@ -136,7 +136,7 @@ else {
 	}
 	catch (PDOException $ex) {
 	  $response["success"] = 0;
- 	  $response["message"] = "Database Error = 5. Riprova!";
+ 	  $response["message"] = "Database Error = 6. Riprova!";
  	  die(json_encode($response));
 	}
 	$saldo_aggiornato=($_POST['saldo']*10);
@@ -146,7 +146,7 @@ else {
 	die(json_encode($response));
 	}
 	else {
-	$response["message"] = "Database Error = 6. Riprova!";
+	$response["message"] = "Database Error = 7. Riprova!";
  	die(json_encode($response));
 	}
 }
