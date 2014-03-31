@@ -33,12 +33,12 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
 //Se il campo post['GIFT'] non è vuoto, eseguo l'else
 else {
-$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id)";
+$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
 	   ':product_id' => $_POST['gift_id'],
-	   //':date' => $date,
+	   ':date' => $date,
     );
  try {
         $stmt   = $db->prepare($check);
