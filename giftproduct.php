@@ -8,7 +8,7 @@ let's require the connection to happen:
 */
 require("config.inc.php");
 //Selezioni i prodotti premio che l'utente può permettersi
-$check = "SELECT p.name, sp.coins FROM shops_products sp JOIN products p ON (sp.product_id = p.id) WHERE (sp.shop_id = :id_attivita AND sp.product_type = 'prize') AND sp.coins <= :user_coins";
+$check = "SELECT sp.id, p.name, sp.coins FROM shops_products sp JOIN products p ON (sp.product_id = p.id) WHERE (sp.shop_id = :id_attivita AND sp.product_type = 'prize') AND sp.coins <= :user_coins";
 // AND product_type = 'prize')
 //Inizializzo parametri
 $query_params = array(
@@ -35,6 +35,7 @@ if ($rows) {
         $products             = array();
 		$products["name"]  = $row["name"];
 		$products["coins"] = $row["coins"];
+		$products["id"] = $row["id"];
         //update our repsonse JSON data
         array_push($response["products"], $products);
     }
