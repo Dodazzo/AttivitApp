@@ -37,7 +37,7 @@ $check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VAL
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':product_id' => $_POST['gift_id'],
+	   ':gift_id' => $_POST['gift_id'],
 	   ':date' => $date,
     );
  try {
