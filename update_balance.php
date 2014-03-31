@@ -33,12 +33,12 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
 //Se il campo post['GIFT'] non è vuoto, eseguo l'else
 else {
-$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id)";
+$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
 $query_params0 = array(
-	   ':id_utente' => $_POST['id_utente'],
-	   ':id_attivita' => $_POST['id_attivita'],
-	   ':gift_id' => $_POST['gift_id'],
-	   //':date' => $date,
+	   ':id_utente' => 200,
+	   ':id_attivita' => 4,
+	   ':gift_id' => 1,
+	   ':date' => $date,
     );
  try {
         $stmt   = $db->prepare($check);
@@ -46,10 +46,9 @@ $query_params0 = array(
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error = 2.!";
+        $response["message"] = "Database Error = 2. Uff.!";
         die(json_encode($response));
     }
-$row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
