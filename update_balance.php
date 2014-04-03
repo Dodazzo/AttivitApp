@@ -9,7 +9,7 @@ require("config.inc.php");
 date_default_timezone_set('Europe/Rome'); 
 $date = date('Y-m-d H:i:s');
 //Se il campo post['GIFT'] è vuoto, eseguo l'if
-if (empty($_POST['gift'])){
+if (($_POST['gift']=='no')){
 $check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, :date)";
 //Inizializzo parametri
 $query_params0 = array(
@@ -69,7 +69,7 @@ $row = $stmt->fetch();
 if ($row) {
 	$coin_trovato = $row['coins'];
 	// Se è un prodotto premio:
-	if ($_POST['gift']){
+	if ($_POST['gift']=='yes'){
 	$query = "UPDATE users_shops SET coins = coins - :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
 	$query_params = array(
 	   		':id_utente' => $_POST['id_utente'],
