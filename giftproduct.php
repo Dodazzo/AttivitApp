@@ -43,7 +43,7 @@ if ($rows) {
     echo json_encode($response);
         
 } else {
-    $response["success"] = 0;
+    $response["success"] = 2;
     $response["message"] = "Non ci sono prodotti disponibili!";
     die(json_encode($response));
 }
