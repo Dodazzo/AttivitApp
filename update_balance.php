@@ -31,7 +31,7 @@ $row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
-//Se il campo post['GIFT'] non è vuoto, eseguo l'else
+//Se il campo post['GIFT'] è yes, eseguo l'else
 else {
 $check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
 $query_params0 = array(
@@ -121,33 +121,33 @@ if ($row) {
 }
 
 else {
-	if (empty($_POST['gift'])){
+	if (($_POST['gift']=='no')){
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
-	$query = "INSERT INTO users_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
-	$query_params = array(
-      ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
-	  ':id_utente' => $_POST['id_utente'],
-	  ':id_attivita' => $_POST['id_attivita'],
-      );
-	//Eseguo la query
-	try {
-  	  $stmt   = $db->prepare($query);
-  	  $result = $stmt->execute($query_params);
-	}
-	catch (PDOException $ex) {
-	  $response["success"] = 0;
- 	  $response["message"] = "Database Error = 6. Riprova!";
- 	  die(json_encode($response));
-	}
-	$saldo_aggiornato=($_POST['saldo']*10);
-	$response["success"] = 1;
-	$response["message"] = "Record Utente inserito con successo (aggiornato)!";
-	$response["saldo"] = $saldo_aggiornato;
-	die(json_encode($response));
+		$query = "INSERT INTO users_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
+		$query_params = array(
+		  ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
+		  ':id_utente' => $_POST['id_utente'],
+		  ':id_attivita' => $_POST['id_attivita'],
+		  );
+		//Eseguo la query
+		try {
+		  $stmt   = $db->prepare($query);
+		  $result = $stmt->execute($query_params);
+		}
+		catch (PDOException $ex) {
+		  $response["success"] = 0;
+		  $response["message"] = "Database Error = 6. Riprova!";
+		  die(json_encode($response));
+		}
+		$saldo_aggiornato=($_POST['saldo']*10);
+		$response["success"] = 1;
+		$response["message"] = "Record Utente inserito con successo (aggiornato)!";
+		$response["saldo"] = $saldo_aggiornato;
+		die(json_encode($response));
 	}
 	else {
-	$response["message"] = "Database Error = 7. Riprova!";
- 	die(json_encode($response));
+		$response["message"] = "Database Error = 7. Riprova!";
+ 		die(json_encode($response));
 	}
 }
 
