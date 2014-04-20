@@ -15,7 +15,7 @@ $check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id
 $query_params0 = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
-	   ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
+	   ':saldo' => (round(str_replace(",",".", $_POST['saldo'])*10)),
 	   ':date' => $date,
     );
  try {
@@ -25,9 +25,8 @@ $query_params0 = array(
     catch (PDOException $ex) {
 		$saldo=str_replace(",",".", $_POST['saldo']);
 		$saldo2=str_replace(",",".", $_POST['saldo'])*10;
-		$saldo3=$saldo*10;
         $response["success"] = 0;
-        $response["message"] = "Database Error = 1.! Saldo : {$saldo} | Saldo X10 : {$saldo2} | SaldoX10 No post : {$saldo3}";
+        $response["message"] = "Database Error = 1.! Saldo : {$saldo} | Saldo X10 : {$saldo2}";
         die(json_encode($response));
     }
 $row = $stmt->fetch();
