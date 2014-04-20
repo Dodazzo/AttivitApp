@@ -23,8 +23,8 @@ $query_params0 = array(
         $result = $stmt->execute($query_params0);
     }
     catch (PDOException $ex) {
-		$saldo=$_POST['saldo'];
-		$saldo2=$_POST['saldo']*10;
+		$saldo=str_replace(",",".", $_POST['saldo']);
+		$saldo2=str_replace(",",".", $_POST['saldo'])*10;
 		$saldo3=$saldo*10;
         $response["success"] = 0;
         $response["message"] = "Database Error = 1.! Saldo : {$saldo} | Saldo X10 : {$saldo2} | SaldoX10 No post : {$saldo3}";
