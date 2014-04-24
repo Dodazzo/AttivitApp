@@ -25,12 +25,12 @@
         // different types of database servers.  For more information on PDO: 
         // http://us2.php.net/manual/en/class.pdo.php 
 		$dsn = "pgsql:"
-   		  . "host=ec2-54-217-238-105.eu-west-1.compute.amazonaws.com;"
-  		  . "dbname=d8beph4mkklush;"
-  		  . "user=dbdovoircmztgq;"
+   		  . "host=ec2-54-217-239-20.eu-west-1.compute.amazonaws.com;"
+  		  . "dbname=d5mcfmri10n2nu;"
+  		  . "user=wjoiwbyoeotzov;"
   		  . "port=5432;"
   		  . "sslmode=require;"
- 		  . "password=nWCfrFu6YT01ue3wpk-Ku3lv-u"; 
+ 		  . "password=ZWpTG338zSayzIsnez02XfGzyb"; 
 		$db = new PDO($dsn);
 		
         //$db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options); 
