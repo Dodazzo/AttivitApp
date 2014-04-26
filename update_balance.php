@@ -143,7 +143,7 @@ else {
 		}
 		$saldo_aggiornato=($_POST['saldo']*10);
 		$response["success"] = 1;
-		$response["message"] = "Record Utente inserito con successo (aggiornato)!";
+		$response["message"] = "Record Utente inserito con successo (aggiornato) Saldo : {$_POST['saldo']}!";
 		$response["saldo"] = $saldo_aggiornato;
 		die(json_encode($response));
 	}

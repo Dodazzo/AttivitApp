@@ -51,7 +51,7 @@ if (!empty($_POST)) {
 	}
 	else {
 			$id_ok = true;
-			$coins='5';
+			$coins='0';
 	}	
 //Utente Trovato
     if ($login_ok && $id_ok) {
