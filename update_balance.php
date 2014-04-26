@@ -133,7 +133,7 @@ else {
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
 		$query = "INSERT INTO users_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
 		$query_params = array(
-		  ':saldo' => (str_replace(",",".", $_POST['saldo'])*10),
+		  ':saldo' => (round(str_replace(",",".", $_POST['saldo'])*10)),
 		  ':id_utente' => $_POST['id_utente'],
 		  ':id_attivita' => $_POST['id_attivita'],
 		  );
