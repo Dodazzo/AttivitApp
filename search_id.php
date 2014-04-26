@@ -40,7 +40,7 @@ if (!empty($_POST)) {
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error2. Riprova!";
+        $response["message"] = "Database Error2. Riprova! {$_POST['shop_id']}";
         die(json_encode($response));
     }
 	$row_2 = $stmt->fetch();
