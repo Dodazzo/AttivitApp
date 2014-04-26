@@ -56,8 +56,11 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
 
 //Controllo se c'è già un record nel DB users_shops relativo all'utente
-$query = "SELECT coins FROM users_shops WHERE user_id = :id_utente";    
-$query_params = array(':id_utente' => $_POST['id_utente']);
+$query = "SELECT coins FROM users_shops WHERE user_id = :id_utente AND shop_id = :shop_id";    
+$query_params = array(
+	   ':id_utente' => $_POST['id_utente'],
+	   ':shop_id' => $_POST['shop_id'],
+    );
 try {
         $stmt   = $db->prepare($query);
         $result = $stmt->execute($query_params);
