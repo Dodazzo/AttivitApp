@@ -34,13 +34,14 @@ if (!empty($_POST)) {
 	   ':id' => $row['id'],
 	   ':shop_id' => $_POST['shop_id'],
     );
+	$id_attivita=$_POST['shop_id'];
 	 try {
         $stmt   = $db->prepare($query);
         $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error2. Riprova! {$_POST['shop_id']}";
+        $response["message"] = "Database Error2. Riprova! Post: {$_POST['shop_id']} Variabile : {$id_attivita} ";
         die(json_encode($response));
     }
 	$row_2 = $stmt->fetch();
