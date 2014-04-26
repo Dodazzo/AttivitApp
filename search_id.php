@@ -29,8 +29,7 @@ if (!empty($_POST)) {
         }
     }
 	//Query Saldo Utente
-	$shop_id='4';
-	$query = "SELECT coins FROM users_shops WHERE user_id = :id AND shop_id = $shop_id"; 
+	$query = "SELECT coins FROM users_shops WHERE user_id = :id AND shop_id = :shop_id"; 
 	$query_params = array(
 	   ':id' => $row['id'],
 	   ':shop_id' => $_POST['shop_id'],
@@ -42,7 +41,7 @@ if (!empty($_POST)) {
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error2. Riprova! Post: {$_POST['shop_id']} Variabile : {$id_attivita} | $shop_id = {$shop_id}";
+        $response["message"] = "Database Error2. Riprova! Post: {$_POST['shop_id']}";
         die(json_encode($response));
     }
 	$row_2 = $stmt->fetch();
