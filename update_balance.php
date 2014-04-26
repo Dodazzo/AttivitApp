@@ -5,14 +5,14 @@ Qualora fosse la prima volta che l'utente visita il locale, la pagina provveder�
 */
 //config.inc.php permette la connessione al DB.
 require("config.inc.php");
-
 date_default_timezone_set('Europe/Rome'); 
 $date = date('Y-m-d H:i:s');
-//Se il campo post['GIFT'] è vuoto, eseguo l'if
+$gettoni=round(str_replace(",",".", $_POST['saldo'])*10);
+//Se il campo post['GIFT'] è no, eseguo l'if
 if (($_POST['gift']=='no')){
 $check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, :date)";
 //Inizializzo parametri
-$query_params0 = array(
+$query_params = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
 	   ':saldo' => (round(str_replace(",",".", $_POST['saldo'])*10)),
@@ -20,15 +20,14 @@ $query_params0 = array(
     );
  try {
         $stmt   = $db->prepare($check);
-        $result = $stmt->execute($query_params0);
+        $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
-		$saldo=str_replace(",",".", $_POST['saldo']);
-		$saldo2=str_replace(",",".", $_POST['saldo'])*10;
         $response["success"] = 0;
-        $response["message"] = "Database Error = 1.!";
+        $response["message"] = "Database Error = 1!";
         die(json_encode($response));
     }
+
 $row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
@@ -36,7 +35,7 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 //Se il campo post['GIFT'] è yes, eseguo l'else
 else {
 $check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
-$query_params0 = array(
+$query_params = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
 	   ':gift_id' => $_POST['gift_id'],
@@ -44,7 +43,7 @@ $query_params0 = array(
     );
  try {
         $stmt   = $db->prepare($check);
-        $result = $stmt->execute($query_params0);
+        $result = $stmt->execute($query_params);
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
@@ -59,7 +58,7 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 $query = "SELECT coins FROM users_shops WHERE user_id = :id_utente AND shop_id = :shop_id";    
 $query_params = array(
 	   ':id_utente' => $_POST['id_utente'],
-	   ':shop_id' => $_POST['shop_id'],
+	   ':shop_id' => $_POST['id_attivita'],
     );
 try {
         $stmt   = $db->prepare($query);
@@ -71,6 +70,7 @@ try {
         die(json_encode($response));
     }
 $row = $stmt->fetch();
+//Se c'è già un record, aggiorno quello:
 if ($row) {
 	$coin_trovato = $row['coins'];
 	// Se è un prodotto premio:
@@ -98,6 +98,8 @@ if ($row) {
 	$response["saldo"]= $saldo_aggiornato;
 	die(json_encode($response));
 	}
+
+
 	//Se non è un prodotto premio:
 	else {
 	$query = "UPDATE users_shops SET coins = coins + :saldo WHERE user_id = :id_utente AND shop_id = :id_attivita";
@@ -125,8 +127,9 @@ if ($row) {
 	}
 }
 
+
+
 else {
-	if (($_POST['gift']=='no')){
 	//Se non c'è un record nel DB dell'utente nella tabella mie_attivita, creo il record
 		$query = "INSERT INTO users_shops (user_id, shop_id, coins) VALUES (:id_utente, :id_attivita, :saldo);";
 		$query_params = array(
@@ -149,11 +152,7 @@ else {
 		$response["message"] = "Record Utente inserito con successo (aggiornato) Saldo : {$_POST['saldo']}!";
 		$response["saldo"] = $saldo_aggiornato;
 		die(json_encode($response));
-	}
-	else {
-		$response["message"] = "Database Error = 7. Riprova!";
- 		die(json_encode($response));
-	}
+		
 }
 
 
