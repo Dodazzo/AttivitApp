@@ -30,7 +30,7 @@ if (!empty($_POST)) {
     }
 	//Query Saldo Utente
 	$shop_id='4';
-	$query = "SELECT coins FROM users_shops WHERE user_id = :id && shop_id = $shop_id"; 
+	$query = "SELECT coins FROM users_shops WHERE user_id = :id AND shop_id = $shop_id"; 
 	$query_params = array(
 	   ':id' => $row['id'],
 	   ':shop_id' => $_POST['shop_id'],
