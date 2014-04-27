@@ -31,6 +31,7 @@ $query_params = array(
 $row = $stmt->fetch();
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
+die(json_encode($response));
 }
 //Se il campo post['GIFT'] è yes, eseguo l'else
 else {
@@ -93,7 +94,7 @@ if ($row) {
 	$row = $stmt->fetch();
 	$saldo_aggiornato=$coin_trovato-($_POST['saldo']);
 	$response["success"] = 1;
-	$response["message"] = "Regalo aggiunto! Update coins avvenuto con successo!";
+	$response["message"] = "Regalo aggiunto! Update coins avvenuto con successo! ";
 	$response["coins_inseriti"]= $_POST['saldo'];
 	$response["saldo"]= $saldo_aggiornato;
 	die(json_encode($response));
