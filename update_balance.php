@@ -10,11 +10,12 @@ $date = date('Y-m-d H:i:s');
 $gettoni=round(str_replace(",",".", $_POST['saldo'])*10);
 //Se il campo post['GIFT'] è no, eseguo l'if
 if (($_POST['gift']=='no')){
-$check = "INSERT INTO receipts (user_id, shop_id, total, created_at) VALUES (:id_utente, :id_attivita, :saldo, :date)";
+$check = "INSERT INTO receipts (user_id, shop_id, pass_type, total, created_at) VALUES (:id_utente, :id_attivita, :pass, :saldo, :date)";
 //Inizializzo parametri
 $query_params = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
+	   ':pass' => $_POST['pass'],
 	   ':saldo' => (round(str_replace(",",".", $_POST['saldo'])*10)),
 	   ':date' => $date,
     );
@@ -34,10 +35,11 @@ $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
 //Se il campo post['GIFT'] è yes, eseguo l'else
 else {
-$check = "INSERT INTO prizes (shop_id, user_id, shop_product_id, created_at) VALUES (:id_attivita, :id_utente, :gift_id, :date)";
+$check = "INSERT INTO prizes (user_id, shop_id, pass_type, shop_product_id, created_at) VALUES (:id_utente, :id_attivita, :pass, :gift_id, :date)";
 $query_params = array(
 	   ':id_utente' => $_POST['id_utente'],
 	   ':id_attivita' => $_POST['id_attivita'],
+	   ':pass' => $_POST['pass'],
 	   ':gift_id' => $_POST['gift_id'],
 	   ':date' => $date,
     );
@@ -53,7 +55,7 @@ $query_params = array(
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
-
+/*
 //Controllo se c'è già un record nel DB users_shops relativo all'utente
 $query = "SELECT coins FROM users_shops WHERE user_id = :id_utente AND shop_id = :shop_id";    
 $query_params = array(
@@ -158,5 +160,5 @@ else {
 
 
 
-
+*/
 ?>

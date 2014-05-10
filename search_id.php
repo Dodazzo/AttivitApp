@@ -5,28 +5,52 @@ Questa pagina ricerca all'interno del database l'utente colleggato alla tessera 
 //config.inc.php permette la connessione al DB.
 require("config.inc.php");
 if (!empty($_POST)) {
-    //Query ricerca utente
-    $query = "SELECT first_name, last_name, id FROM users WHERE hash_tessera = :hash_tessera"; 
-    $query_params = array(':hash_tessera' => $_POST['hash_tessera']);
-    
-    try {
-        $stmt   = $db->prepare($query);
-        $result = $stmt->execute($query_params);
-    }
-    catch (PDOException $ex) {
-        $response["success"] = 0;
-        $response["message"] = "Database Error1. Riprova!";
-        die(json_encode($response));
-    }
-	$validated_info = false;
-    $row = $stmt->fetch();
-	
-    if ($row) {
-            $login_ok = true;
-			$firstname = $row["first_name"];
-			$lastname = $row["last_name"];
-			$id = $row["id"];
-        }
+	    //Query ricerca utente
+	    $query = "SELECT first_name, last_name, id FROM users WHERE hash_card = :hash_pass"; 
+	    $query_params = array(':hash_pass' => $_POST['hash_pass']);
+	    
+	    try {
+	        $stmt   = $db->prepare($query);
+	        $result = $stmt->execute($query_params);
+	    }
+	    catch (PDOException $ex) {
+	        $response["success"] = 0;
+	        $response["message"] = "Database Error1. Riprova!";
+	        die(json_encode($response));
+	    }
+	    $row = $stmt->fetch();	
+	    if ($row) {
+	            $login_ok = true;
+	            $pass = "card";
+				$firstname = $row["first_name"];
+				$lastname = $row["last_name"];
+				$id = $row["id"];
+	    }
+	    else {
+		    $query = "SELECT first_name, last_name, id FROM users WHERE hash_keychain = :hash_pass"; 
+	    	$query_params = array(':hash_pass' => $_POST['hash_pass']);
+	    	try {
+		        $stmt   = $db->prepare($query);
+		        $result = $stmt->execute($query_params);
+	    	}
+		    catch (PDOException $ex) {
+		        $response["success"] = 0;
+		        $response["message"] = "Database Error2. Riprova!";
+		        die(json_encode($response));
+		    }
+		    $row = $stmt->fetch();	
+		    if ($row) {
+		        $login_ok = true;
+		        $pass = "keychain";
+				$firstname = $row["first_name"];
+				$lastname = $row["last_name"];
+				$id = $row["id"];
+		    }
+		    else {
+		    	 $response["success"] = 0;
+       			 $response["message"] = "Utente non trovato :-(";
+		    }	
+	    }
     }
 	//Query Saldo Utente
 	$query = "SELECT coins FROM users_shops WHERE user_id = :id AND shop_id = :shop_id"; 
@@ -41,7 +65,7 @@ if (!empty($_POST)) {
     }
     catch (PDOException $ex) {
         $response["success"] = 0;
-        $response["message"] = "Database Error2. Riprova! Post: {$_POST['shop_id']}";
+        $response["message"] = "Database Error3. Riprova! Post: {$_POST['shop_id']}";
         die(json_encode($response));
     }
 	$row_2 = $stmt->fetch();
@@ -60,6 +84,7 @@ if (!empty($_POST)) {
 		$response["first_name"] = $firstname;
 		$response["last_name"] = $lastname;
 		$response["id"] = $id;
+		$response["pass"] = $pass;
 		$response["coins"] = $coins;
 		die(json_encode($response));
 
