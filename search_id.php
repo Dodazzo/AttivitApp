@@ -48,7 +48,7 @@ if (!empty($_POST)) {
 		    }
 		    else {
 		    	 $response["success"] = 0;
-       			 $response["message"] = "Utente non trovato sobs :-( (Hash: {$_POST['hash_pass']})";
+       			 $response["message"] = "Utente non trovato sobs :-( (Hash: {$_POST['hash_pass']} ! Shop id: {$_POST['shop_id']})";
        			 die(json_encode($response));
 		    }	
 	    }
