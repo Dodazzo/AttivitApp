@@ -55,7 +55,7 @@ $query_params = array(
 $response["success"] = 1;
 $response["message"] = "Aggiunto con successo il check in YO! {$date}";
 }
-/*
+
 //Controllo se c'è già un record nel DB users_shops relativo all'utente
 $query = "SELECT coins FROM users_shops WHERE user_id = :id_utente AND shop_id = :shop_id";    
 $query_params = array(
@@ -72,6 +72,9 @@ try {
         die(json_encode($response));
     }
 $row = $stmt->fetch();
+$response["saldo"]= $saldo_aggiornato;
+die(json_encode($response));
+/*
 //Se c'è già un record, aggiorno quello:
 if ($row) {
 	$coin_trovato = $row['coins'];
